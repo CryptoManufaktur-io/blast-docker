@@ -36,7 +36,7 @@ case ${LOG_LEVEL} in
     ;;
 esac
 
-if [ ! -d /var/lib/kroma-geth/geth/chaindata ]; then
+if [ ! -d /blast/geth/chaindata ]; then
   echo "Initializing from genesis."
   curl \
     --fail \
