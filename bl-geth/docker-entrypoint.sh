@@ -1,17 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ ! -f /blast/ee-secret/jwtsecret ]]; then
-  echo "Generating JWT secret"
-  __secret1=$(head -c 8 /dev/urandom | od -A n -t u8 | tr -d '[:space:]' | sha256sum | head -c 32)
-  __secret2=$(head -c 8 /dev/urandom | od -A n -t u8 | tr -d '[:space:]' | sha256sum | head -c 32)
-  echo -n "${__secret1}""${__secret2}" > /blast/ee-secret/jwtsecret
-fi
-
-if [[ -O "/blast/ee-secret/jwtsecret" ]]; then
-  chmod 666 /blast/ee-secret/jwtsecret
-fi
-
 # Set verbosity
 shopt -s nocasematch
 case ${LOG_LEVEL} in

@@ -4,7 +4,7 @@ FROM blastio/blast-geth:${NETWORK}
 
 RUN apk update && apk add --no-cache ca-certificates tzdata bash curl
 
-RUN mkdir -p /blast/ee-secret && mkdir -p /blast/config \
+RUN mkdir -p /blast/ee-secret && mkdir -p /blast/config && mkdir -p /blast/snapshot \
     && chmod -R 700 /blast && chmod 777 /blast/ee-secret
 
 # Cannot assume buildkit, hence no chmod

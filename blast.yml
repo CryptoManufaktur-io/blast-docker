@@ -7,6 +7,20 @@ x-logging: &logging
       tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
 
 services:
+  bl-geth-init:
+    restart: "no"
+    build:
+      context: ./init
+      dockerfile: Dockerfile
+    image: init:blast
+    pull_policy: never
+    environment:
+      - SNAPSHOT=${SNAPSHOT:-}
+    volumes:
+      - blgeth-data:/blast
+      - jwtsecret:/blast/ee-secret
+      - /etc/localtime:/etc/localtime:ro
+
   bl-geth:
     restart: "unless-stopped"
     build:
@@ -25,6 +39,9 @@ services:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - EL_EXTRAS=${EL_EXTRAS:-}
       - NETWORK=${NETWORK}
+    depends_on:
+      bl-geth-init:
+        condition: service_completed_successfully
     <<: *logging
     entrypoint:
       - docker-entrypoint.sh

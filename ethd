@@ -510,7 +510,7 @@ envmigrate() {
   fi
 
 # Adjust these vars to your project
-  ALL_VARS=( COMPOSE_FILE NETWORK L1_RPC L1_RPC_KIND L1_BEACON EL_EXTRAS CL_EXTRAS \
+  ALL_VARS=( COMPOSE_FILE NETWORK SNAPSHOT L1_RPC L1_RPC_KIND L1_BEACON EL_EXTRAS CL_EXTRAS \
           LOG_LEVEL DEPLOY_TAG SCRIPT_TAG DOMAIN RPC_HOST RPC_LB NODE_HOST \
           NODE_LB WS_HOST WS_LB RPC_PORT WS_PORT NODE_RPC_PORT NODE_P2P_PORT )
 
@@ -557,7 +557,25 @@ upgrade() {
 
 
 start() {
-  docompose up -d --remove-orphans "$@"
+  if ! type -P screen >/dev/null 2>&1; then
+    ${__auto_sudo} apt-get update && ${__auto_sudo} apt-get install -y screen
+  fi
+  NETWORK=blast
+  rm -f "/tmp/${NETWORK}-compose-screen.log"
+  screen -dmS "${NETWORK}-compose-session" -L -Logfile "/tmp/${NETWORK}-compose-screen.log" ${__compose_exe} up -d --remove-orphans "$@"
+  echo "Running \"docker compose up -d\" in screen because of the op-geth-init container."
+  echo
+  echo "If this is your first start and you are getting a SNAPSHOT, you can view the init logs:"
+  echo "\"./ethd logs -f op-geth-init\""
+  echo
+  echo "You can attach to the screen session with \"screen -r ${NETWORK}-compose-session\""
+  echo
+  echo "Waiting 5 seconds"
+  sleep 5
+  echo
+  echo "Here's the output of docker compose so far:"
+  cat "/tmp/${NETWORK}-compose-screen.log"
+  echo
 }
 
 
