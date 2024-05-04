@@ -1,0 +1,9 @@
+# To be used with blast.yml
+services:
+  bl-geth:
+    ports:
+      - ${RPC_PORT:-8545}:${RPC_PORT:-8545}/tcp
+      - ${WS_PORT:-8546}:${WS_PORT:-8546}/tcp
+  bl-node:
+    ports:
+      - ${NODE_RPC_PORT:-9545}:${NODE_RPC_PORT:-9545}/tcp

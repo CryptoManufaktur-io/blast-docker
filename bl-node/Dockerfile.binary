@@ -1,0 +1,15 @@
+ARG NETWORK
+
+FROM blastio/blast-optimism:${NETWORK}
+
+RUN apk update && apk add --no-cache ca-certificates tzdata bash su-exec curl
+
+RUN mkdir -p /blast/ee-secret && mkdir -p /blast/config \
+    && chmod -R 700 /blast && chmod 777 /blast/ee-secret
+
+# Cannot assume buildkit, hence no chmod
+COPY --chown=${USER}:${USER} ./docker-entrypoint.sh /usr/local/bin/
+# Belt and suspenders
+RUN chmod -R 755 /usr/local/bin/*
+
+ENTRYPOINT ["op-node"]
