@@ -382,14 +382,14 @@ warn_l1() {
     echo "Warning: Your L1 RPC (EL) is not set to a valid value. Syncing will fail."
     echo
   fi
-#  var="L1_BEACON"
-#  value=$(sed -n -e "s/^${var}=\(.*\)/\1/p" "${ENV_FILE}" || true)
+  var="L1_BEACON"
+  value=$(sed -n -e "s/^${var}=\(.*\)/\1/p" "${ENV_FILE}" || true)
 # Literal match intended
 # shellcheck disable=SC2076
-#  if [[ "${value}" =~ "example.com" ]]; then
-#    echo "Warning: Your L1 Beacon (CL) is not set to a valid value. Syncing will fail."
-#    echo
-#  fi
+  if [[ "${value}" =~ "example.com" ]]; then
+    echo "Warning: Your L1 Beacon (CL) is not set to a valid value. Syncing will fail."
+    echo
+  fi
 }
 
 
@@ -510,7 +510,7 @@ envmigrate() {
   fi
 
 # Adjust these vars to your project
-  ALL_VARS=( COMPOSE_FILE NETWORK L1_RPC L1_RPC_KIND EL_EXTRAS CL_EXTRAS \
+  ALL_VARS=( COMPOSE_FILE NETWORK L1_RPC L1_RPC_KIND L1_BEACON EL_EXTRAS CL_EXTRAS \
           LOG_LEVEL DEPLOY_TAG SCRIPT_TAG DOMAIN RPC_HOST RPC_LB NODE_HOST \
           NODE_LB WS_HOST WS_LB RPC_PORT WS_PORT NODE_RPC_PORT NODE_P2P_PORT )
 

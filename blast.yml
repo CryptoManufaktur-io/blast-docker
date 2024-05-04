@@ -32,8 +32,8 @@ services:
       - --datadir
       - /blast
       - --http
-      - --http.corsdomain="*"
-      - --http.vhosts="*"
+      - --http.corsdomain=*
+      - --http.vhosts=*
       - --http.addr
       - 0.0.0.0
       - --http.port
@@ -45,14 +45,14 @@ services:
       - 0.0.0.0
       - --ws.port
       - ${WS_PORT:-8546}
-      - --ws.origins="*"
+      - --ws.origins=*
       - --ws.api
       - eth,txpool,net
       - --authrpc.addr
       - 0.0.0.0
       - --authrpc.port
       - "8551"
-      - --authrpc.vhosts="*"
+      - --authrpc.vhosts=*
       - --authrpc.jwtsecret
       - /blast/ee-secret/jwtsecret
       - --syncmode
