@@ -8,6 +8,7 @@ x-logging: &logging
 
 services:
   bl-geth:
+    restart: "unless-stopped"
     build:
       context: ./bl-geth
       dockerfile: Dockerfile.binary
@@ -92,6 +93,7 @@ services:
       - metrics.port=6060
 
   bl-node:
+    restart: "unless-stopped"
     build:
       context: ./bl-node
       dockerfile: Dockerfile.binary
