@@ -74,8 +74,6 @@ services:
       - /blast/ee-secret/jwtsecret
       - --syncmode
       - full
-      - --gcmode
-      - archive
       - --nodiscover
       - --maxpeers
       - "0"
