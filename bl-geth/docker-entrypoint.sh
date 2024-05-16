@@ -40,7 +40,7 @@ if [ ! -d /blast/geth/chaindata ]; then
 
 # Word splitting is desired for the command line parameters
 # shellcheck disable=SC2086
-  geth ${__verbosity} init --datadir=/blast /blast/config/genesis.json
+  geth ${__verbosity} init --datadir=/blast --state.scheme=path /blast/config/genesis.json
 fi
 
 # Get extra env variables
