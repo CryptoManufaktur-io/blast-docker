@@ -27,7 +27,7 @@ services:
       context: ./bl-geth
       dockerfile: Dockerfile.binary
       args:
-        - NETWORK=${NETWORK}
+        - DOCKER_TAG=${BLGETH_DOCKER_TAG}
     image: bl-geth:${NETWORK}
     pull_policy: never
     stop_grace_period: 50s
@@ -113,7 +113,7 @@ services:
       context: ./bl-node
       dockerfile: Dockerfile.binary
       args:
-        - NETWORK=${NETWORK}
+        - DOCKER_TAG=${BLNODE_DOCKER_TAG}
     image: bl-node:${NETWORK}
     pull_policy: never
     stop_grace_period: 50s

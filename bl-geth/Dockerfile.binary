@@ -1,6 +1,6 @@
-ARG NETWORK
+ARG DOCKER_TAG
 
-FROM blastio/blast-geth:${NETWORK}
+FROM blastio/blast-geth:${DOCKER_TAG}
 
 RUN apk update && apk add --no-cache ca-certificates tzdata bash curl
 
