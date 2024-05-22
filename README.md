@@ -21,4 +21,4 @@ The `./blastd` script can be used as a quick-start:
 
 To update the software, run `./blastd update` and then `./blastd up`
 
-This is Blast Docker v1.0.0
+This is Blast Docker v2.0.0
