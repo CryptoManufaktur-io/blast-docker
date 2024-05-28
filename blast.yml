@@ -132,6 +132,8 @@ services:
     entrypoint:
       - docker-entrypoint.sh
       - op-node
+      - --log.level
+      - ${LOG_LEVEL}
       - --l1
       - ${L1_RPC}
       - --l1.rpckind
