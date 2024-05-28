@@ -55,7 +55,9 @@ curl \
   "https://raw.githubusercontent.com/blast-io/deployment/master/${NETWORK}/.config" \
   -o /blast/config/.config
 
+set -a
 source /blast/config/.config
+set +a
 
 # Word splitting is desired for the command line parameters
 # shellcheck disable=SC2086
